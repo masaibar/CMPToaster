@@ -30,6 +30,7 @@ kotlin {
       implementation(compose.foundation)
       implementation(compose.material3)
       implementation(compose.ui)
+      implementation(libs.compose.ui.backhandler)
       implementation(project(":toast"))
     }
 
@@ -40,11 +41,11 @@ kotlin {
 }
 
 android {
-  namespace = "io.github.masaibar.toastcmp.sample"
+  namespace = "com.masaibar.toastcmp.sample"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   defaultConfig {
-    applicationId = "io.github.masaibar.toastcmp.sample"
+    applicationId = "com.masaibar.toastcmp.sample"
     minSdk = libs.versions.android.minSdk.get().toInt()
     targetSdk = libs.versions.android.compileSdk.get().toInt()
     versionCode = 1

@@ -1,9 +1,9 @@
 # ToastCMP
 
 [![build](https://github.com/masaibar/ToastCMP/actions/workflows/build.yml/badge.svg)](https://github.com/masaibar/ToastCMP/actions/workflows/build.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.masaibar/toast-cmp.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.masaibar/toast-cmp)
+[![Maven Central](https://img.shields.io/maven-central/v/com.masaibar/toast-cmp.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/com.masaibar/toast-cmp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.3.21-blue.svg?logo=kotlin)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.1.21-blue.svg?logo=kotlin)
 ![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS-brightgreen.svg)
 
 A tiny **Android-style toast for Compose Multiplatform** (Android + iOS).
@@ -26,13 +26,16 @@ dialogs, and it only survives navigation if you host it at the app root.
 ToastCMP takes a different route. The API is Compose-friendly (`rememberToast()`), but the
 toast itself is rendered **natively**:
 
-- **iOS** — presented on a dedicated `UIWindow` above `UIWindowLevelAlert`. So it:
+- **iOS** — presented on a dedicated `UIWindow` at `UIWindowLevelAlert + 1`. So it:
   - survives every transition — Compose navigation, `UIViewController` push/present, even native modals
-  - floats above native alerts, action sheets, and the keyboard
+  - floats above Compose dialogs and native alerts / action sheets
   - needs no Compose host and pulls in zero third-party dependencies
 - **Android** — delegates to the native `android.widget.Toast`, which already behaves this way.
 
-In short: a Compose API, with native behavior that "just shows" — anywhere, on top of anything.
+In short: a Compose API, with native behavior that "just shows" — on top of your dialogs, across navigation.
+
+> Note: like any toast, it does not draw over the software keyboard (the keyboard window
+> sits at a higher level on both platforms).
 
 ## Install
 
@@ -42,7 +45,7 @@ In short: a Compose API, with native behavior that "just shows" — anywhere, on
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation("io.github.masaibar:toast-cmp:0.1.0")
+      implementation("com.masaibar:toast-cmp:0.1.0")
     }
   }
 }
@@ -55,19 +58,22 @@ kotlin {
 ## Usage
 
 ```kotlin
-import io.github.masaibar.toastcmp.ToastDuration
-import io.github.masaibar.toastcmp.rememberToast
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import com.masaibar.toastcmp.ToastDuration
+import com.masaibar.toastcmp.rememberToast
 
 @Composable
-fun MyScreen() {
+fun Demo() {
   val toast = rememberToast()
 
-  Button(onClick = { toast.show("Saved!") }) {
-    Text("Save")
+  Button(onClick = { toast.show("This is a short toast") }) {
+    Text("Short toast")
   }
 
-  Button(onClick = { toast.show("Upload finished", ToastDuration.LONG) }) {
-    Text("Upload")
+  Button(onClick = { toast.show("This is a long toast", ToastDuration.LONG) }) {
+    Text("Long toast")
   }
 }
 ```
@@ -89,6 +95,21 @@ expect fun rememberToast(): Toast
 |----------|----------------|-------|
 | `SHORT`  | `LENGTH_SHORT` | ~2.0s |
 | `LONG`   | `LENGTH_LONG`  | ~3.5s |
+
+## Sample app
+
+A runnable Compose Multiplatform sample lives in [`sample/`](sample) (shared UI), with an
+Android app and an iOS app in [`iosApp/`](iosApp). It demonstrates where a native toast
+shines:
+
+- **Basics** — short and long toasts
+- **Shows above a dialog** — the toast appears on top of a Compose `AlertDialog`
+- **Survives navigation** — show a toast, move to another screen, and it stays visible
+
+Run it:
+
+- **Android** — open the repository root in Android Studio and run the `sample` configuration
+- **iOS** — open `iosApp/iosApp.xcodeproj` in Xcode and run on a simulator
 
 ## Supported targets
 

@@ -1,20 +1,14 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  alias(libs.plugins.androidMultiplatformLibrary)
+  alias(libs.plugins.androidLibrary)
   alias(libs.plugins.composeCompiler)
   alias(libs.plugins.composeMultiplatform)
   alias(libs.plugins.kotlinMultiplatform)
 }
 
 kotlin {
-  androidLibrary {
-    namespace = "io.github.masaibar.toastcmp"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    minSdk = libs.versions.android.minSdk.get().toInt()
-
-    withHostTestBuilder {}.configure {}
-
+  androidTarget {
     compilerOptions {
       jvmTarget.set(JvmTarget.JVM_17)
     }
@@ -40,9 +34,29 @@ kotlin {
       implementation(compose.ui)
     }
 
-    getByName("androidHostTest").dependencies {
+    getByName("androidUnitTest").dependencies {
       implementation(libs.junit)
       implementation(libs.robolectric)
+    }
+  }
+}
+
+android {
+  namespace = "com.masaibar.toastcmp"
+  compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+  defaultConfig {
+    minSdk = libs.versions.android.minSdk.get().toInt()
+  }
+
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
+
+  testOptions {
+    unitTests {
+      isIncludeAndroidResources = true
     }
   }
 }

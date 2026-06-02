@@ -18,8 +18,8 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Build Android library
         run: ./gradlew :toast:assemble
-      - name: Run Android host tests
-        run: ./gradlew :toast:testAndroidHostTest
+      - name: Run Android unit tests
+        run: ./gradlew :toast:testDebugUnitTest
 
   ios:
     runs-on: macos-14
