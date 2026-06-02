@@ -15,7 +15,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - name: Build Android library
         run: ./gradlew :toast:assemble
       - name: Run Android unit tests
@@ -29,6 +29,6 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - name: Compile iOS (simulator)
         run: ./gradlew :toast:compileKotlinIosSimulatorArm64
