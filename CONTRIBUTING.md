@@ -9,8 +9,8 @@ all sizes are welcome — bug reports, docs, and code.
 git clone https://github.com/masaibar/ToastCMP.git
 cd ToastCMP
 ./gradlew :toast:assemble                        # Android library
+./gradlew :toast:testAndroidHostTest             # Android unit tests (Robolectric, JVM)
 ./gradlew :toast:compileKotlinIosSimulatorArm64  # iOS compile check
-./gradlew :toast:iosSimulatorArm64Test           # run tests (iOS)
 ```
 
 ## Pull requests

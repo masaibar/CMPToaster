@@ -40,8 +40,9 @@ kotlin {
       implementation(compose.ui)
     }
 
-    commonTest.dependencies {
-      implementation(kotlin("test"))
+    getByName("androidHostTest").dependencies {
+      implementation(libs.junit)
+      implementation(libs.robolectric)
     }
   }
 }

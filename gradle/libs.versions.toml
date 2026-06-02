@@ -3,7 +3,13 @@ agp = "9.2.1"
 android-compileSdk = "36"
 android-minSdk = "29"
 compose-multiplatform = "1.11.0"
+junit = "4.13.2"
 kotlin = "2.3.21"
+robolectric = "4.14.1"
+
+[libraries]
+junit = { module = "junit:junit", version.ref = "junit" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 
 [plugins]
 androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
