@@ -28,3 +28,4 @@ dependencyResolutionManagement {
 }
 
 include(":toast")
+include(":sample")
