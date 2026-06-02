@@ -45,7 +45,7 @@ In short: a Compose API, with native behavior that "just shows" — on top of yo
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation("com.masaibar:toast-cmp:0.1.0")
+      implementation("com.masaibar:toast-cmp:1.0.0")
     }
   }
 }

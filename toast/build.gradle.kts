@@ -5,6 +5,7 @@ plugins {
   alias(libs.plugins.composeCompiler)
   alias(libs.plugins.composeMultiplatform)
   alias(libs.plugins.kotlinMultiplatform)
+  alias(libs.plugins.mavenPublish)
 }
 
 kotlin {
@@ -57,6 +58,34 @@ android {
   testOptions {
     unitTests {
       isIncludeAndroidResources = true
+    }
+  }
+}
+
+mavenPublishing {
+  coordinates("com.masaibar", "toast-cmp", "1.0.0")
+  pom {
+    name.set("ToastCMP")
+    description.set("A tiny Android-style toast for Compose Multiplatform (Android + iOS).")
+    inceptionYear.set("2026")
+    url.set("https://github.com/masaibar/ToastCMP")
+    licenses {
+      license {
+        name.set("MIT License")
+        url.set("https://opensource.org/licenses/MIT")
+      }
+    }
+    developers {
+      developer {
+        id.set("masaibar")
+        name.set("masaibar")
+        url.set("https://github.com/masaibar")
+      }
+    }
+    scm {
+      url.set("https://github.com/masaibar/ToastCMP")
+      connection.set("scm:git:git://github.com/masaibar/ToastCMP.git")
+      developerConnection.set("scm:git:ssh://git@github.com/masaibar/ToastCMP.git")
     }
   }
 }
