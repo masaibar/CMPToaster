@@ -39,8 +39,19 @@ In short: a Compose API, with native behavior that "just shows" — on top of yo
 
 ## Install
 
+CMPToaster is published to Maven Central. Make sure `mavenCentral()` is in your
+repositories, then add the dependency to your shared module.
+
 ```kotlin
-// settings.gradle.kts — mavenCentral() already covers it
+// settings.gradle.kts
+dependencyResolutionManagement {
+  repositories {
+    mavenCentral()
+  }
+}
+```
+
+```kotlin
 // build.gradle.kts (your shared module)
 kotlin {
   sourceSets {
