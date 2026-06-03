@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="assets/logo.png" alt="CMPToaster logo" width="180">
+</div>
+
 # CMPToaster
 
 [![build](https://github.com/masaibar/CMPToaster/actions/workflows/build.yml/badge.svg)](https://github.com/masaibar/CMPToaster/actions/workflows/build.yml)
