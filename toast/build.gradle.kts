@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -6,6 +7,7 @@ plugins {
   alias(libs.plugins.composeMultiplatform)
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.mavenPublish)
+  signing
 }
 
 kotlin {
@@ -64,6 +66,8 @@ android {
 
 mavenPublishing {
   coordinates("com.masaibar", "cmp-toaster", "1.0.0")
+  publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+  signAllPublications()
   pom {
     name.set("CMPToaster")
     description.set("A tiny Android-style toast for Compose Multiplatform (Android + iOS).")
@@ -88,4 +92,10 @@ mavenPublishing {
       developerConnection.set("scm:git:ssh://git@github.com/masaibar/CMPToaster.git")
     }
   }
+}
+
+// gpg 2.5 が出力する秘密鍵は署名プラグイン内蔵のBouncy Castleで読めないため、
+// in-memory鍵ではなくローカルのgpgコマンドに署名させる
+signing {
+  useGpgCmd()
 }
