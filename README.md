@@ -156,6 +156,14 @@ Run it:
 ./gradlew :toast:compileKotlinIosSimulatorArm64    # iOS (fast check)
 ```
 
+## Apps using CMPToaster
+
+| | App |
+|---|-----|
+| <img src="assets/icon-admonitor.png" alt="AdMonitor" width="40"> | [AdMonitor - Dashboard for AdMob](https://play.google.com/store/apps/details?id=com.masaibar.admonitor) |
+
+> Using CMPToaster in your app? Feel free to open a PR to add it here!
+
 ## License
 
 [MIT](LICENSE) © masaibar
