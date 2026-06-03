@@ -9,14 +9,12 @@ import androidx.compose.runtime.Composable
  *
  * - **Android**: delegates to the native [android.widget.Toast].
  * - **iOS**: there is no native toast, so a transient overlay is rendered on a
- *   dedicated [platform.UIKit.UIWindow] above the key window. It survives screen
- *   transitions and never blocks user interaction.
+ *   dedicated [platform.UIKit.UIWindow] above normal app content. The iOS window
+ *   is configured not to receive touch events.
  */
 expect class Toast {
   /**
    * Shows [message] for the given [duration].
-   *
-   * Safe to call from any thread; the toast is always presented on the main thread.
    */
   fun show(
     message: String,

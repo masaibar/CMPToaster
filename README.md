@@ -9,33 +9,34 @@
 A tiny **Android-style toast for Compose Multiplatform** (Android + iOS).
 
 iOS has no native toast. This library fills that gap: on iOS it renders a transient
-overlay on a dedicated `UIWindow` above your key window — so it survives screen
-transitions and never blocks touches — while on Android it simply delegates to the
-native `android.widget.Toast`.
+overlay in a dedicated `UIWindow` above normal app content, with the window configured
+not to receive touch events. On Android it delegates to the native
+`android.widget.Toast`.
 
 - ✅ One API, two platforms
-- ✅ Zero third-party dependencies (only Compose runtime)
-- ✅ Safe to call from any thread
+- ✅ No non-Compose runtime dependencies
+- ✅ Platform-backed presentation
 
 ## Why CMPToaster?
 
-Most Compose Multiplatform toast libraries **draw** the toast inside the Compose tree
-(a `Popup`/overlay). That ties the toast to the composition: it can be covered by native
-dialogs, and it only survives navigation if you host it at the app root.
+Some toast implementations **draw** the toast inside the Compose tree
+(a `Popup`/overlay). That ties the toast to the composition: it may be covered by native
+dialogs, and navigation behavior depends on where the overlay is hosted.
 
 CMPToaster takes a different route. The API is Compose-friendly (`rememberToast()`), but the
 toast itself is rendered **natively**:
 
 - **iOS** — presented on a dedicated `UIWindow` at `UIWindowLevelAlert + 1`. So it:
-  - survives every transition — Compose navigation, `UIViewController` push/present, even native modals
-  - floats above Compose dialogs and native alerts / action sheets
-  - needs no Compose host and pulls in zero third-party dependencies
-- **Android** — delegates to the native `android.widget.Toast`, which already behaves this way.
+  - can remain visible during common Compose navigation and UIKit transitions
+  - is intended to appear above Compose dialogs and standard UIKit alerts / action sheets
+  - does not need a Compose host for the toast overlay
+- **Android** — delegates to the native `android.widget.Toast`.
 
-In short: a Compose API, with native behavior that "just shows" — on top of your dialogs, across navigation.
+In short: a Compose-facing API with platform-backed presentation.
 
-> Note: like any toast, it does not draw over the software keyboard (the keyboard window
-> sits at a higher level on both platforms).
+> Note: the iOS overlay is positioned near the bottom safe area and is not intended
+> to cover the software keyboard. Android keyboard behavior is handled by the native
+> platform toast.
 
 ## Install
 
@@ -89,7 +90,10 @@ That's the whole API:
 
 ```kotlin
 expect class Toast {
-  fun show(message: String, duration: ToastDuration = ToastDuration.SHORT)
+  fun show(
+    message: String,
+    duration: ToastDuration = ToastDuration.SHORT
+  )
 }
 
 enum class ToastDuration { SHORT, LONG }
@@ -112,15 +116,15 @@ To build the library and run the sample:
 | JDK | 17 |
 | Gradle | 8.11.1 (bundled via wrapper) |
 | Android Gradle Plugin | 8.7.3 |
-| Android Studio | Ladybug (2024.2.1) or newer |
+| Android Studio | Ladybug (2024.2.1) |
 | Kotlin | 2.1.21 |
 | Compose Multiplatform | 1.8.2 |
 | Android `compileSdk` / `minSdk` | 35 / 29 |
 | Xcode (for iOS) | 16.x |
 | iOS deployment target | 15.0 |
 
-> Consuming the library only requires Kotlin 2.1+ and Compose Multiplatform 1.8+ in your
-> own project — newer toolchains work too (the published artifact is forward-compatible).
+> The published artifact was built with Kotlin 2.1.21 and Compose Multiplatform 1.8.2.
+> Consumer projects should use compatible Kotlin and Compose Multiplatform versions.
 
 ## Sample app
 
@@ -129,12 +133,11 @@ To build the library and run the sample:
 | <img src="assets/sample-android.gif" alt="CMPToaster sample on Android" width="240"> | <img src="assets/sample-ios.gif" alt="CMPToaster sample on iOS" width="240"> |
 
 A runnable Compose Multiplatform sample lives in [`sample/`](sample) (shared UI), with an
-Android app and an iOS app in [`iosApp/`](iosApp). It demonstrates where a native toast
-shines:
+Android app and an iOS app in [`iosApp/`](iosApp). It includes:
 
 - **Basics** — short and long toasts
-- **Shows above a dialog** — the toast appears on top of a Compose `AlertDialog`
-- **Survives navigation** — show a toast, move to another screen, and it stays visible
+- **Dialog example** — show a toast while a Compose `AlertDialog` is open
+- **Navigation example** — show a toast, then move to another screen
 
 Run it:
 
