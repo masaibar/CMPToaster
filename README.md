@@ -158,9 +158,9 @@ Run it:
 
 ## Apps using CMPToaster
 
-| | App |
-|---|-----|
-| <img src="assets/icon-admonitor.png" alt="AdMonitor" width="40"> | [AdMonitor - Dashboard for AdMob](https://play.google.com/store/apps/details?id=com.masaibar.admonitor) |
+|                                                                   | App | Links |
+|-------------------------------------------------------------------|-----|-------|
+| <img src="assets/icon-admonitor.png" alt="AdMonitor" width="120"> | AdMonitor - Dashboard for AdMob | [Google Play](https://play.google.com/store/apps/details?id=com.masaibar.admonitor) / [App Store](https://apps.apple.com/us/app/admonitor-dashboard-for-admob/id6754963063) |
 
 > Using CMPToaster in your app? Feel free to open a PR to add it here!
 
