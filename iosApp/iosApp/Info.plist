@@ -23,6 +23,12 @@
 	<!-- Required by Compose Multiplatform on iOS (ProMotion 120Hz support). -->
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<!-- App content is always light, so force dark status-bar text to keep it
+	     visible even when the device is in dark mode. -->
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDarkContent</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
