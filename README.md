@@ -1,7 +1,3 @@
-<div align="center">
-  <img src="assets/logo.png" alt="CMPToaster logo" width="180">
-</div>
-
 # CMPToaster
 
 [![build](https://github.com/masaibar/CMPToaster/actions/workflows/build.yml/badge.svg)](https://github.com/masaibar/CMPToaster/actions/workflows/build.yml)
@@ -107,6 +103,25 @@ expect fun rememberToast(): Toast
 | `SHORT`  | `LENGTH_SHORT` | ~2.0s |
 | `LONG`   | `LENGTH_LONG`  | ~3.5s |
 
+## Requirements
+
+To build the library and run the sample:
+
+| Tool | Version |
+|------|---------|
+| JDK | 17 |
+| Gradle | 8.11.1 (bundled via wrapper) |
+| Android Gradle Plugin | 8.7.3 |
+| Android Studio | Ladybug (2024.2.1) or newer |
+| Kotlin | 2.1.21 |
+| Compose Multiplatform | 1.8.2 |
+| Android `compileSdk` / `minSdk` | 35 / 29 |
+| Xcode (for iOS) | 16.x |
+| iOS deployment target | 15.0 |
+
+> Consuming the library only requires Kotlin 2.1+ and Compose Multiplatform 1.8+ in your
+> own project — newer toolchains work too (the published artifact is forward-compatible).
+
 ## Sample app
 
 A runnable Compose Multiplatform sample lives in [`sample/`](sample) (shared UI), with an
@@ -133,12 +148,6 @@ Run it:
 ./gradlew :toast:assemble                          # Android
 ./gradlew :toast:compileKotlinIosSimulatorArm64    # iOS (fast check)
 ```
-
-## Acknowledgements
-
-The logo includes the Android robot. The Android robot is reproduced or modified from
-work created and shared by Google and used according to terms described in the
-[Creative Commons 3.0 Attribution License](https://creativecommons.org/licenses/by/3.0/).
 
 ## License
 
