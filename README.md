@@ -124,6 +124,10 @@ To build the library and run the sample:
 
 ## Sample app
 
+| Android | iOS |
+|:---:|:---:|
+| <img src="assets/sample-android.gif" alt="CMPToaster sample on Android" width="240"> | <img src="assets/sample-ios.gif" alt="CMPToaster sample on iOS" width="240"> |
+
 A runnable Compose Multiplatform sample lives in [`sample/`](sample) (shared UI), with an
 Android app and an iOS app in [`iosApp/`](iosApp). It demonstrates where a native toast
 shines:
